@@ -29,7 +29,7 @@ class HomeController extends Controller
         }
         if (Laratrust::hasRole('member')) {
             // return redirect()->route('home.member');
-            return view('home');
+            return redirect('/');
         }
         // return view('home');
     }

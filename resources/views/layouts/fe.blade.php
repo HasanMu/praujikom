@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="{{ asset('assets/fe/robotics/css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fe/robotics/css/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fe/robotics/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/stisla220/assets/modules/fontawesome/css/fontawesome.min.css') }}">
+    <link href="{{ asset('assets/fe/robotics/js/select2-4.0.13/dist/css/select2.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('css/custom-fe.css') }}">
 </head>
 

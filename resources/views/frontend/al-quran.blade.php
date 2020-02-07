@@ -16,9 +16,9 @@
                     Al - Quran
                 </h1>
                 <p class="text-white link-nav">
-                    <a href="index.html">Home </a>
+                    <a href="/">Home </a>
                     <span class="lnr lnr-arrow-right"></span>
-                    <a href="services.html"> Al-Quran</a></p>
+                    <a href="/al-quran"> Al-Quran</a></p>
             </div>
         </div>
     </div>

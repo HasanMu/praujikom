@@ -10,7 +10,27 @@
                     <li><a href="/jadwal-sholat">Jadwal Sholat</a></li>
                     <li><a href="/al-quran">Al-Quran</a></li>
                     <li><a href="/kajian">Kumpulan Kajian</a></li>
-                    <li><a href="/login">Login</a></li>
+                    @guest
+                    <li><a href="/login">Masuk</a></li>
+                    @else
+                    <li class="menu-has-children">
+                        <a href="#">{{ Auth::user()->name }}</a>
+                        <ul>
+                            <li><a href="/profile">
+                                <i class="fa fa-user"></i> &nbsp; Profilku
+                            <li><a href="javascript:void(0)"
+                                onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp; Keluar
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                    @endguest
                 </ul>
             </nav><!-- #nav-menu-container -->
         </div>

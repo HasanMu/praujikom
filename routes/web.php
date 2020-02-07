@@ -39,3 +39,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
         return view('admin.home');
     })->name('home.admin');
 });
+
+// Member Route
+Route::group(['middleware' => ['auth', 'role:member']], function () {
+    Route::get('/profile', function () {
+        return view('frontend.users/profile');
+    })->name('home.member');
+});

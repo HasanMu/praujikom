@@ -15,7 +15,7 @@
                 <h1 class="text-white">
                     Jadwal Sholat
                 </h1>
-                <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="services.html"> Services</a></p>
+                <p class="text-white link-nav"><a href="/">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="/jadwal-sholat"> jadwal Sholat</a></p>
             </div>
         </div>
     </div>
@@ -58,5 +58,6 @@
 @endsection
 
 @push('js')
+    <script type="module" src="{{ asset('js/bagian-waktu.js') }}"></script>
     <script src="{{ asset('js/jadwal_sholat.js') }}"></script>
 @endpush

@@ -18,7 +18,9 @@
                         Quam labore velit et porro pariatur quo, ea dignissimos accusantium.
                         Temporibus, nisi?
                     </p>
-                    <a href="/login" class="primary-btn header-btn text-uppercase">Gabung Sekarang</a>
+                    @guest
+                        <a href="/register" class="primary-btn header-btn text-uppercase">Gabung Sekarang</a>
+                    @endguest
                 </div>
                 <div class="banner-img col-lg-6 col-md-6">
                     <img class="img-fluid" src="{{ asset('assets/fe/robotics/img/banner-img.png') }}" alt="">
@@ -97,16 +99,20 @@
                 <div class="col-lg-12 col-md-12">
                     <div class="single-feature">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="">Kabupaten/Kota</label>
                                   <select name="" id="search_kabko" class="form-select"></select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label for="">Waktu</label>
+                                <input type="date" name="" class="form-control radius" id="waktu-jadwal-sholat" placeholder="">
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label> Kota yang dipilih</label>
-                                    <h5 class="kota-dipilih"></h5>
+                                    <br>
+                                    <button type="button" class="genric-btn primary radius w-100 mt-1" id="cari-jadwal-sholat">CARI</button>
                                 </div>
                             </div>
                         </div>
@@ -174,5 +180,6 @@
 @endsection
 
 @push('js')
+    <script src="{{ asset('assets/fe/robotics/js/select2-4.0.13/dist/js/select2.min.js') }}"></script>
     <script src="{{ asset('js/jadwal_sholat.js') }}"></script>
 @endpush

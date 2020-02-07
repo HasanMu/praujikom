@@ -1,0 +1,11 @@
+.skin-purple-light .main-header .logo {
+    background-color: #8a90ff;
+    color: #fff;
+    border-bottom: 0 solid transparent;
+}
+.skin-purple-light .main-header .navbar {
+    background-color: #8a90ff;
+}
+.skin-purple-light .main-header li.user-header {
+    background-color: #8a90ff;
+}
