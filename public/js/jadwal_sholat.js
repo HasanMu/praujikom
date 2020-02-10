@@ -261,20 +261,13 @@ function getKota() {
     })
 }
 
-$('#search_kabko').on('change', function() {
-    getJadwalSholat($(this).val());
-})
+$("#cari-jadwal-sholat").on("click", function() {
+    getJadwalSholat($("#search_kabko").val(), $("#waktu-jadwal-sholat").val());
+});
 
-function getJadwalSholat(kota) {
+function getJadwalSholat(kota, date) {
     var _kota = kota;
-    var today = new Date();
-
-    var _date =
-        today.getFullYear() +
-        "-" +
-        ("0" + (today.getMonth() + 1)).slice(-2) +
-        "-" +
-        ("0" + today.getDate()).slice(-2);
+    var _date = date;
 
     $.ajax({
         url: host + "jadwal/kota/"+_kota+"/tanggal/"+_date,
@@ -288,6 +281,8 @@ function getJadwalSholat(kota) {
                 url: host + "kota/kode/" + _kota,
                 method: 'GET',
                 success: (scs) => {
+                    console.log(scs);
+
                     $(".kota-dipilih").text(scs.kota[0].nama);
                 },
                 error: (er) => {
@@ -339,6 +334,15 @@ function getJadwalSholat(kota) {
                             `);
                         }
                     });
+
+                    $("#keterangan-jadwal-sholat").html("");
+                    $("#keterangan-jadwal-sholat").append(`
+                    <div class="col-md-12">
+                        <hr>
+                        <h6>Jadwal Sholat Kota <b>${s.kota[0].nama}</b></h6>
+                        <h4>${res.jadwal.data["tanggal"]}</h4>
+                    </div>
+                    `);
                 },
                 error: f => {
                     console.log(f);

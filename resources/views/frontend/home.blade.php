@@ -102,7 +102,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="">Kabupaten/Kota</label>
-                                  <select name="" id="search_kabko" class="form-select"></select>
+                                  <select name="" id="search_kabko" class="single-input"></select>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -116,6 +116,7 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row text-center" id="keterangan-jadwal-sholat"></div>
                     </div>
                 </div>
             </div>

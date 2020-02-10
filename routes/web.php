@@ -14,9 +14,9 @@
 Route::get('/', function () {
     return view('frontend.home');
 });
-Route::get('/jadwal-sholat', function () {
-    return view('frontend.jadwal-sholat');
-});
+// Route::get('/jadwal-sholat', function () {
+//     return view('frontend.jadwal-sholat');
+// });
 Route::get('/al-quran', function () {
     return view('frontend.al-quran');
 });

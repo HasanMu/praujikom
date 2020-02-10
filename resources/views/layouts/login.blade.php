@@ -14,7 +14,7 @@
 <style type="text/css">
 	body {
 		color: #fff;
-		background-image: -moz-linear-gradient(0deg, #828fff 0%, #d496ff 100%);
+		background-image: linear-gradient(0deg, #828fff 0%, #d496ff 100%);
 	}
 	.form-control {
         min-height: 41px;

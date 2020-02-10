@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/fe/AdminLTE/bower_components/Ionicons/css/ionicons.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/fe/AdminLTE/dist/css/AdminLTE.min.css') }}">
+    @yield('css')
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('assets/fe/AdminLTE/dist/css/skins/_all-skins.min.css') }}">
@@ -271,6 +272,7 @@
     <script src="{{ asset('assets/fe/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <!-- FastClick -->
     <script src="{{ asset('assets/fe/AdminLTE/bower_components/fastclick/lib/fastclick.js')}}"></script>
+    @stack('js')
     <!-- AdminLTE App -->
     <script src="{{ asset('assets/fe/AdminLTE/dist/js/adminlte.min.js')}}"></script>
     <!-- AdminLTE for demo purposes -->

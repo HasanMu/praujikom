@@ -9,3 +9,9 @@
 .skin-purple-light .main-header li.user-header {
     background-color: #8a90ff;
 }
+.skin-purple-light .main-header .logo:hover {
+    background-color: rgb(111, 118, 252, 1);
+}
+.skin-purple-light .main-header .navbar .sidebar-toggle:hover {
+    background-color: rgb(111, 118, 252, 1);
+}

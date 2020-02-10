@@ -7,7 +7,7 @@
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
                     <li class="menu-active"><a href="/">Home</a></li>
-                    <li><a href="/jadwal-sholat">Jadwal Sholat</a></li>
+                    {{-- <li><a href="/jadwal-sholat">Jadwal Sholat</a></li> --}}
                     <li><a href="/al-quran">Al-Quran</a></li>
                     <li><a href="/kajian">Kumpulan Kajian</a></li>
                     @guest
