@@ -102,7 +102,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                   <label for="">Kabupaten/Kota</label>
-                                  <select name="" id="search_kabko" class="single-input"></select>
+                                  <select name="" id="search_kabko" class="form-select"></select>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -181,6 +181,17 @@
 @endsection
 
 @push('js')
+    @if(session()->get( 'notify' ))
+        <script>
+            $(document).ready(function() {
+                iziToast.success({
+                    title: 'Hello, {{ Auth::user()->name }}',
+                    message: 'Kamu barusan login',
+                    position: 'bottomLeft'
+                });
+            })
+        </script>
+    @endif
     <script src="{{ asset('assets/fe/robotics/js/select2-4.0.13/dist/js/select2.min.js') }}"></script>
     <script src="{{ asset('js/jadwal_sholat.js') }}"></script>
 @endpush

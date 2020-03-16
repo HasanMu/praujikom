@@ -7,6 +7,8 @@
     <title>{{ Auth::user()->name }} | @yield('title')</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="{{ asset('assets/fe/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
@@ -15,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/fe/AdminLTE/bower_components/Ionicons/css/ionicons.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/fe/AdminLTE/dist/css/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/stisla220/assets/modules/izitoast/css/iziToast.min.css') }}">
     @yield('css')
     <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
@@ -44,7 +47,8 @@
             <section class="content-header">
                 <h1>
                     @yield('header')
-                    <small>new</small>
+                    <small class="label label-warning" id="updated">
+                    </small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -272,6 +276,7 @@
     <script src="{{ asset('assets/fe/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <!-- FastClick -->
     <script src="{{ asset('assets/fe/AdminLTE/bower_components/fastclick/lib/fastclick.js')}}"></script>
+    <script src="{{ asset('assets/stisla220/assets/modules/izitoast/js/iziToast.min.js') }}"></script>
     @stack('js')
     <!-- AdminLTE App -->
     <script src="{{ asset('assets/fe/AdminLTE/dist/js/adminlte.min.js')}}"></script>

@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+
 Route::get('/', function () {
     return view('frontend.home');
 });
@@ -42,7 +44,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
 
 // Member Route
 Route::group(['middleware' => ['auth', 'role:member']], function () {
-    Route::get('/profile', function () {
-        return view('frontend.users/profile');
-    })->name('home.member');
+    Route::get('/profile', 'Member\ProfileController@profilePage')->name('home.member');
+    Route::get('/profiles', function () {
+        if (Auth::check()) {
+            $response = [
+                'message'   => 'berhasil',
+                'data'      => Auth::user()
+            ];
+
+            return response()->json($response, 200);
+        } else {
+            return redirect('/login');
+        }
+    });
+    Route::post('/profile', 'Member\ProfileController@editProfile')->name('editProfile');
+    Route::post('/profile/security', 'Member\ProfileController@editPassword')->name('editPassword');
 });

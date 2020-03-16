@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
         $adminUser->email = "admin@ms.com";
         $adminUser->password = bcrypt("rahasiaku");
         $adminUser->gender = 1;
-        $adminUser->image = "default-avatar.jpg";
+        $adminUser->image = "default-avatar.png";
         $adminUser->save();
         $adminUser->attachRole("admin");
 
@@ -59,7 +59,7 @@ class UsersTableSeeder extends Seeder
         $memberUser->email = "user@mail.com";
         $memberUser->password = bcrypt("rahasiaku");
         $memberUser->gender = 2;
-        $memberUser->image = "default-avatar.jpg";
+        $memberUser->image = "default-avatar.png";
         $memberUser->save();
         $memberUser->attachRole('member');
     }

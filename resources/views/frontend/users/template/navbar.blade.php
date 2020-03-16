@@ -22,25 +22,16 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        @if (Auth::user()->image)
-                            <img src="{{ asset('assets/images/users/default-avatar.png') }}" class="user-image" alt="{{ Auth::user()->name }}">
-                        @else
-                            <img src="{{ asset('assets/images/users/default-avatar.png') }}" class="user-image" alt="{{ Auth::user()->name }}">
-                        @endif
-                        <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                        <img src="" class="user-image" alt="" id="profile-navbar-image" style="height: 25px; width: 25px;">
+                        <span class="hidden-xs" id="profile-navbar-name"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            @if (Auth::user()->image)
-                                <img src="{{ asset('assets/images/users/default-avatar.png') }}" class="img-circle" alt="{{ Auth::user()->name }}">
-                            @else
-                                <img src="{{ asset('assets/images/users/default-avatar.png') }}" class="img-circle" alt="{{ Auth::user()->name }}">
-                            @endif
+                            <img src="" class="img-circle" alt="" id="profile-navbar-dropdown-image">
 
-                            <p>
-                                {{ Auth::user()->name }}
-                                <small>Member since {{ Auth::user()->created_at->diffForHumans() }}</small>
+                            <p id="profile-navbar-dropdown-name">
+                                <small id="profile-navbar-dropdown-email"></small>
                             </p>
                         </li>
                         <!-- Menu Footer-->

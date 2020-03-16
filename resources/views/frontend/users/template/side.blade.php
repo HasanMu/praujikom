@@ -4,14 +4,10 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                @if (Auth::user()->image)
-                    <img src="{{ asset('assets/images/users/default-avatar.png') }}" class="img-circle" alt="{{ Auth::user()->name }}">
-                @else
-                    <img src="{{ asset('assets/images/users/default-avatar.png') }}" class="img-circle" alt="{{ Auth::user()->name }}">
-                @endif
+                <img src="" class="img-circle" alt="" id="profile-sidebar-image" style="height: 45px; width: 45px;">
             </div>
             <div class="pull-left info">
-                <p>{{ Auth::user()->name }}</p>
+                <p id="profile-sidebar-name"></p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>

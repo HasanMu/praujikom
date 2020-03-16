@@ -10,11 +10,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
 	body {
 		color: #fff;
-		background-image: linear-gradient(0deg, #828fff 0%, #d496ff 100%);
+		background-image: -moz-linear-gradient(0deg, #828fff 0%, #d496ff 100%);
+		background-image: -webkit-linear-gradient(0deg, #828fff 0%, #d496ff 100%);
 	}
 	.form-control {
         min-height: 41px;
@@ -25,13 +26,13 @@
 	.form-control:focus {
 		border-color: #70c5c0;
 	}
-    .form-control, .btn {        
+    .form-control, .btn {
         border-radius: 2px;
     }
 	.login-form {
 		width: 350px;
 		margin: 0 auto;
-		padding: 100px 0 30px;		
+		padding: 100px 0 30px;
 	}
 	.login-form form {
 		color: #7a7a7a;
@@ -40,8 +41,8 @@
         font-size: 13px;
         background: #ececec;
         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-        padding: 30px;	
-        position: relative;	
+        padding: 30px;
+        position: relative;
     }
 	.login-form h2 {
 		font-size: 22px;
@@ -63,11 +64,11 @@
 	}
 	.login-form .avatar img {
 		width: 100%;
-	}	
+	}
     .login-form input[type="checkbox"] {
         margin-top: 2px;
     }
-    .login-form .btn {        
+    .login-form .btn {
         font-size: 16px;
         font-weight: bold;
 		background: #8a90ff;
@@ -77,7 +78,7 @@
 	.login-form .btn:hover, .login-form .btn:focus {
 		background: #50b8b3;
         outline: none !important;
-	}    
+	}
 	.login-form a {
 		color: #fff;
 		text-decoration: underline;
@@ -97,4 +98,4 @@
 <body>
     @yield('content')
 </body>
-</html>                            
+</html>

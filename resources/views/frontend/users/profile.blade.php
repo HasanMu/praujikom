@@ -4,11 +4,7 @@
 @section('header', 'Profilku')
 
 @section('content')
-    <div class="callout callout-info">
-        <h4>Reminder!</h4>
-        Instructions for how to use modals are available on the
-        <a href="http://getbootstrap.com/javascript/#modals">Bootstrap documentation</a>
-    </div>
+    <div class="callout callout-info" id="info-alert"></div>
 
     <div class="row">
         <div class="col-md-6">
@@ -18,27 +14,24 @@
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form role="form">
+                <form role="form" id="edit-data">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Nama Lengkap</label>
-                            <input type="email" class="form-control" id="nama_lengkap" placeholder="Nama Lengkap" value="{{ Auth::user()->name }}">
-                        </div>
-                        <div class="form-group {{ (Auth::user()->dob == '' || Auth::user()->dob == null) ? 'has-warning' : '' }}">
-                            <label for="exampleInputEmail1">Tanggal lahir</label>
-                            <input type="text" class="form-control" id="dob" placeholder="Tanggal Lahir" value="{{ Auth::user()->dob }}">
-                            @if(Auth::user()->dob == '' || Auth::user()->dob == null)
-                                <span class="help-block">Tanggal lahir belum di set</span>
-                            @endif
+                            <label for="exampleInputnama lengkap">Nama Lengkap <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" placeholder="Nama Lengkap" name="name">
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Alamat email</label>
-                            <input type="email" class="form-control" id="email" disabled placeholder="Alamat email" value="{{ Auth::user()->email }}">
+                            <label for="exampleInputEmail1">Tanggal lahir</label>
+                            <input type="text" class="form-control" id="dob" placeholder="Tanggal Lahir" name="dob">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Alamat email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="email" disabled placeholder="Alamat email" name="email">
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Bio (optional)</label>
-                            <textarea cols="5" class="form-control" id="Bio" placeholder="Bio">{{ Auth::user()->bio }}</textarea>
+                            <label for="exampleInputEmail1">Bio</label>
+                            <textarea cols="5" class="form-control" id="Bio" placeholder="Bio" name="bio"></textarea>
                         </div>
 
                         <div class="form-group">
@@ -48,13 +41,13 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <label>
-                                            <input type="radio" name="gender" class="gender" value="1" {{ Auth::user()->gender == 1 ? "checked" : "" }}>
+                                            <input type="radio" name="gender" class="gender" value="1" id="g1">
                                             Laki - Laki
                                         </label>
                                     </div>
                                     <div class="col-sm-4">
                                         <label>
-                                            <input type="radio" name="gender" class="gender" value="2" {{ Auth::user()->gender == 2 ? "checked" : "" }}>
+                                            <input type="radio" name="gender" class="gender" value="2" id="g2">
                                             Perempuan
                                         </label>
                                     </div>
@@ -62,28 +55,24 @@
                             </div>
                         </div>
 
-                        <div class="form-group {{ (Auth::user()->address == '' || Auth::user()->address == null) ? 'has-warning' : '' }}"">
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Alamat</label>
-                            <textarea cols="5" class="form-control" id="alamat" placeholder="Alamat email">{{ Auth::user()->address }}</textarea>
-                            @if(Auth::user()->address == '' || Auth::user()->address == null)
-                                <span class="help-block">Alamat belum di set</span>
-                            @endif
+                            <textarea cols="5" class="form-control" id="alamat" placeholder="Alamat" name="address"></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputFile">File input</label>
-                            <input type="file" id="exampleInputFile">
-
-                            <p class="help-block">Example block-level help text here.</p>
+                            <label for="img-avatar">Foto Profil</label>
+                            <input type="file" id="image" name="image">
                         </div>
 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Google_Lens_-_new_logo.png" class="img-thumbnail" alt="Responsive image" style="width: 200px; height: 200px;">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Google_Lens_-_new_logo.png" class="img-thumbnail" alt="Responsive image" style="width: 200px; height: 200px;">
+                        <img src="" class="img-thumbnail" alt="" style="width: 200px; height: 200px;" id="img-now">
+                        &nbsp; > &nbsp;
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Google_Lens_-_new_logo.png" class="img-thumbnail" id="img-avatar-preview" alt="Responsive image" style="width: 200px; height: 200px;">
                     </div>
                     <!-- /.box-body -->
 
                     <div class="box-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-success">Ubah</button>
                     </div>
                 </form>
                 </div>
@@ -94,50 +83,26 @@
                     <h3 class="box-title">Keamanan</h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
-                    <form role="form">
-                    <!-- text input -->
-                    <div class="form-group">
-                        <label>Text</label>
-                        <input type="text" class="form-control" placeholder="Enter ...">
+                <form role="form" id="edit-sec">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Kata sandi</label>
+                            <input type="password" class="form-control" placeholder="Kata sandi sekarang" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label>Kata sandi baru</label>
+                            <input type="password" class="form-control" placeholder="Kata sandi baru" name="new-password">
+                        </div>
+                        <div class="form-group">
+                            <label>Konfirmasi kata sandi baru</label>
+                            <input type="password" class="form-control" placeholder="Konfirmasi" name="new-password-confirm">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Text Disabled</label>
-                        <input type="text" class="form-control" placeholder="Enter ..." disabled="">
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-danger">Ubah kata sandi</button>
                     </div>
-
-                    <!-- textarea -->
-                    <div class="form-group">
-                        <label>Textarea</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Textarea Disabled</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ..." disabled=""></textarea>
-                    </div>
-
-                    <!-- input states -->
-                    <div class="form-group has-success">
-                        <label class="control-label" for="inputSuccess"><i class="fa fa-check"></i> Input with success</label>
-                        <input type="text" class="form-control" id="inputSuccess" placeholder="Enter ...">
-                        <span class="help-block">Help block with success</span>
-                    </div>
-                    <div class="form-group has-warning">
-                        <label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Input with
-                        warning</label>
-                        <input type="text" class="form-control" id="inputWarning" placeholder="Enter ...">
-                        <span class="help-block">Help block with warning</span>
-                    </div>
-                    <div class="form-group has-error">
-                        <label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> Input with
-                        error</label>
-                        <input type="text" class="form-control" id="inputError" placeholder="Enter ...">
-                        <span class="help-block">Help block with error</span>
-                    </div>
-
-                    </form>
-                </div>
-                <!-- /.box-body -->
+                </form>
                 </div>
         </div>
     </div>
@@ -148,6 +113,7 @@
   <link rel="stylesheet" href="{{ asset('assets/fe/AdminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="{{ asset('assets/fe/AdminLTE/plugins/iCheck/all.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/Semantic-UI-master/dist/components/step.min.css') }}">
 @endsection
 @push('js')
     <!-- InputMask -->
@@ -156,12 +122,8 @@
     <script src="{{ asset('assets/fe/AdminLTE/plugins/input-mask/jquery.inputmask.extensions.js') }}"></script>
     <!-- iCheck 1.0.1 -->
     <script src="{{ asset('assets/fe/AdminLTE/plugins/iCheck/icheck.min.js') }}"></script>
-    <script>
-        $('#dob').inputmask('mm/dd/yyyy', { 'placeholder': 'bb/hh/tttt' })
-        // iCheck
-        $('input[type="radio"].gender').iCheck({
-        checkboxClass: 'icheckbox_flat-green',
-        radioClass   : 'iradio_flat-green'
-        })
-    </script>
+    <script src="{{ asset('js/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-validation/additional-methods.min.js') }}"></script>
+    <script src="{{ asset('js/redux.min.js') }}"></script>
+    <script src="{{ asset('js/frontend/profile.js') }}"></script>
 @endpush
