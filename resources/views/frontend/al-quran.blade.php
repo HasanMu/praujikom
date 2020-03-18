@@ -37,7 +37,7 @@
                             <div class="form-group row">
                                 <label for="cariQS" class="col-sm-2 col-form-label">Cari QS</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="cariQS" placeholder="Nama QS, Arti, No. QS">
+                                    <input type="text" class="form-control" id="cariQS" placeholder="Nama QS, Arti, Jenis (Mekah/Madinah)">
                                 </div>
                             </div>
                         </div>

@@ -60,3 +60,41 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
     Route::post('/profile', 'Member\ProfileController@editProfile')->name('editProfile');
     Route::post('/profile/security', 'Member\ProfileController@editPassword')->name('editPassword');
 });
+
+Route::group(['prefix' => 'api/v1/'], function () {
+    Route::group(['prefix' => 'quran/surah'], function () {
+        Route::get('/', function () {
+            $data = DB::table('quran_surah')->get();
+
+            $response = [
+                'message'   => 'data semua QS',
+                'data'      => $data
+            ];
+
+            return response()->json($response, 200);
+        });
+
+        Route::get('/{qs_id}', function ($qs_id) {
+            $data = DB::table('quran_ayat')->where('qs_id', $qs_id)->get();
+            $QS = DB::table('quran_surah')->where('id', $qs_id)->get();
+            if(!$data || $QS->count() == null) {
+                $response = [
+                    'success'   => false,
+                    'message'   => 'Nomor surat tidak ditemukan!',
+                    'msg'       => 'MAKSIMAL 114',
+                    'url'       => env('APP_URL').'/api/v1/quran/surah/114'
+                ];
+
+                return response()->json($response, 200);
+            }
+
+            $response = [
+                'message'   => 'data QS '.$QS[0]->nama,
+                'namaQS'    => $QS[0]->nama,
+                'data'      => $data
+            ];
+
+            return response()->json($response, 200);
+        });
+    });
+});
