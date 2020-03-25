@@ -66,13 +66,14 @@
         </div>
         <div class="card-wrap">
             <div class="card-header">
-            <h4>Online Users</h4>
+            <h4>Total Admin</h4>
             </div>
             <div class="card-body">
             @php
-                $membersON_ = new App\User;
+                $totalAdmin = \App\User::whereRoleIs('admin')->count();
+
             @endphp
-            {{ $membersON_->allOnline() }}
+            {{ $totalAdmin }}
             </div>
         </div>
         </div>

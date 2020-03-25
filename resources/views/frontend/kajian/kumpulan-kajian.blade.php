@@ -1,40 +1,48 @@
 @extends('frontend.kajian.template')
 
 @section('konten')
-    <div class="col-lg-8 post-list blog-post-list">
-        <div class="single-post">
-            <img class="img-fluid" src="{{ asset('assets/fe/robotics/img/blog/p1.jpg') }}" alt="">
-            <ul class="tags">
-                <li><a href="#">Bandung, </a></li>
-                <li><a href="#">Baleendah </a></li>
-            </ul>
-            <a href="blog-single.html">
-                <h1>
-                    Cartridge Is Better Than Ever
-                    A Discount Toner
-                </h1>
-            </a>
-                <p>
-                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training. who has the willpower to actually sit through a self-imposed MCSE training.
-                </p>
-            <div class="bottom-meta">
-                <div class="user-details row align-items-center">
-                    <div class="comment-wrap col-lg-6">
-                        <ul>
-                            <li><a href="#"><span class="lnr lnr-bubble"></span> 06 Comments</a></li>
-                        </ul>
-                    </div>
-                    {{-- <div class="social-wrap col-lg-6">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                        </ul>
+<div class="col-lg-8 posts-kajian w-100 order-first">
+</div>
 
-                    </div> --}}
-                </div>
+<!-- Modal -->
+<div id="modal" style="display: none;">
+    <form id="form" enctype="multipart/form-data">
+        <div class="modal-body">
+            <div class="profile-post-modal">
+                <img class="img-fluid" src="{{ asset('assets/fe/robotics/img/blog/p1.jpg') }}" alt="" style="height: 45px; width: 45px;">
+                    <div class="form-group">
+                        <textarea id="description" class="form-control" cols="5" rows="5" name="description" placeholder="Ketik kajian"></textarea>
+                        <div class="d-flex">
+                            <div class="form-group">
+                                <label for="cities" class="col-sm-1-12 col-form-label">Kota</label>
+                                <select class="form-control" style="width: 90%;" name="cities" id="cities"></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="district" class="col-sm-1-12 col-form-label">Kota</label>
+                                <select class="form-control" style="width: 90%" name="districts" id="districts"></select>
+                            </div>
+                        </div>
+                        <input id="image" class="form-control-file" type="file" name="image">
+                        <div id="prev-image" style="display: none;">
+                            <img src="" alt="" class="img-fluid" id="img-preview">
+                        </div>
+                    </div>
             </div>
+
         </div>
-    </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-iziModal-close>Tutup</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+    </form>
+</div>
+
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/zoom.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/zoom.js') }}"></script> --}}
+    <script src="{{ asset('js/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('js/jquery-validation/additional-methods.min.js') }}"></script>
+    <script src="{{ asset('js/kajian.js') }}"></script></script>
+@endpush

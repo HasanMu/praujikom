@@ -205,14 +205,14 @@ $(document).ready(() => {
     getData();
     function getData() {
         $.ajax({
-            url: "/profile",
+            url: "/profile/data",
             method: "GET",
             success: res => {
                 const el = $("#edit-data [name]").get();
                 const data = res.data;
                 let img = res.data.image
                     ? res.data.image
-                    : "default-avatar.png";
+                    : "default-avatar.jpg";
 
                 // Side
                 $("#profile-sidebar-name").text(res.data.name);
@@ -237,7 +237,12 @@ $(document).ready(() => {
 
                 // Info Alert
                 let d = new Date(res.data.created_at)
-                let dtf = new Intl.DateTimeFormat('id', {year: 'numeric', month: 'long', day: '2-digit'})
+                let option = {
+                    year: "numeric",
+                    month: "long",
+                    day: "2-digit",
+                };
+                let dtf = new Intl.DateTimeFormat('id', option)
                 let [{ value: da },,{ value: mo },,{ value: ye }] = dtf.formatToParts(d)
 
                 $("#info-alert").text('');

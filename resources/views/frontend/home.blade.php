@@ -192,6 +192,5 @@
             })
         </script>
     @endif
-    <script src="{{ asset('assets/fe/robotics/js/select2-4.0.13/dist/js/select2.min.js') }}"></script>
     <script src="{{ asset('js/jadwal_sholat.js') }}"></script>
 @endpush

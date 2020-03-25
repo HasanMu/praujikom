@@ -10,7 +10,7 @@
     <div class="container">
         <div class="row">
             @yield('konten')
-            <div class="col-lg-4 sidebar">
+            <div class="col-lg-4 sidebar order-last">
                 <div class="single-widget search-widget">
                     <form class="example" action="#" style="margin:auto;max-width:300px">
                         <input type="text" placeholder="Cari Kajian" name="search2">
@@ -19,19 +19,25 @@
                 </div>
 
                 <div class="single-widget protfolio-widget">
-                    <img src="{{ asset('assets/fe/robotics/img/blog/user1.jpg') }}" alt="">
-                    <a href="#"><h4>Hasan Muhammad</h4></a>
-                    <p>
-                        MCSE boot camps have its supporters and
-                        its detractors. Some people do not understand why you should have to spend money
-                        on boot camp when you can get.
-                    </p>
-                    <ul>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                    </ul>
+                    @if (Auth::check())
+                        @if (Auth::user()->image)
+                            <img src="{{ asset('assets/images/users'.Auth::user()->image) }}" class="img-fluid" alt="{{ Auth::user()->name }}" style="height: 125px; width: 125px;">
+                        @else
+                            <img src="{{ asset('assets/images/users/default-avatar.jpg') }}" class="img-fluid" alt="{{ Auth::user()->name }}" style="height: 125px; width: 125px;">
+                        @endif
+                        <a href="/profile"><h4>{{ Auth::user()->name }}</h4></a>
+                        <p>
+                            {{ Auth::user()->bio ? Auth::user()->bio : 'Belum ada bio' }}
+                        </p>
+                        <a id="" class="primary-btn new-kajian" href="javascript:void(0);" role="button">Buat Kajian</a>
+                        <a id="" class="primary-btn" href="/profile" role="button">Profil</a>
+                    @else
+                        <h4>Hai! Selamat Datang</h4>
+                        <p>
+                            Mari bergabung bersama kami di Muslim Society!
+                        </p>
+                        <a href="/register" class="primary-btn">Daftar</a>
+                    @endif
                 </div>
 
                 <div class="single-widget category-widget">
@@ -49,3 +55,7 @@
 </section>
 
 @endsection
+
+@push('js')
+    @stack('scripts')
+@endpush

@@ -1,7 +1,33 @@
+/*
+* Setting Fonts
+* ===================
+*/
 @font-face {
     font-family: fontArab;
-    src: url('/assets/fonts/LPMQ\ IsepMisbah.ttf');
+    src: url("/assets/fonts/LPMQ\ IsepMisbah.ttf");
 }
+
+/* Liberation Sans */
+@font-face {
+    font-family: LibSans;
+    src: url("/assets/fonts/LiberationSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: LibSansBold;
+    src: url("/assets/fonts/LiberationSans-Bold.ttf");
+}
+
+@font-face {
+    font-family: LibSansBoldItalic;
+    src: url("/assets/fonts/LiberationSans-BoldItalic.ttf");
+}
+
+@font-face {
+    font-family: LibSansItalic;
+    src: url("/assets/fonts/LiberationSans-Italic.ttf");
+}
+/* End Libration Sans */
 .arab {
     font-family: fontArab;
 }
@@ -13,5 +39,269 @@
     right: 0;
     transition: all 0.5s;
     z-index: 997;
-    background: rgba(138, 144, 255, 0.9)
+    background: rgba(138, 144, 255, 0.9);
+}
+.price-area .single-price {
+    box-shadow: 0px 20px 60px 0px rgba(101, 52, 254, 0.3);
+    cursor: pointer;
+}
+.price-area .single-price:hover {
+    box-shadow: 0px 20px 60px 0px rgba(101, 52, 254, 0.6);
+    cursor: pointer;
+}
+
+/*
+ * Kumpulan Kajian
+*/
+
+.posts-kajian {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.posts-kajian .posts-not-found {
+    text-align: center;
+    align-self: center;
+    height: 100%;
+}
+
+.posts-kajian .single-post .banner-post {
+    width: 100;
+    height: 100%;
+}
+.posts-kajian .single-post .title-post h1 {
+    font-family: LibSans;
+}
+.posts-kajian .single-post .content-post {
+    font-family: LibSans;
+}
+/*  */
+.nav-post {
+    height: auto;
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+}
+
+.nav-post img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+
+.nav-post .bottom-meta .comment-wrap ul > li > a {
+    font-family: LibSansBold;
+}
+
+.nav-post .nav-post-profile {
+    display: flexbox;
+    padding-left: 10px;
+    padding-top: 3px;
+    width: 100%;
+}
+
+.nav-post .nav-post-profile p {
+    font-family: LibSans;
+}
+
+.nav-post .nav-post-profile h6 {
+    font-family: LibSans;
+}
+.nav-post .nav-post-right {
+    width: 100%;
+    text-align: right;
+}
+.nav-post .nav-post-right a i{
+    color: #212529;
+}
+
+/* iziModal */
+.iziModal-wrap
+    .iziModal-content
+    form
+    .modal-body
+    .profile-post-modal
+    #description {
+    border: 1px white solid;
+    width: 100%;
+    height: 120px;
+    font: 12pt LibSans;
+    resize: none;
+    margin-bottom: 10px;
+}
+.iziModal-wrap
+    .iziModal-content
+    form
+    .modal-body
+    .profile-post-modal
+    #description:focus {
+    outline: none !important;
+    border-bottom-color: #ddd;
+    box-shadow: 0 0 1px white;
+    /* border-color: #28CA97; */
+}
+.profile-post-modal {
+    display: inline-flex;
+    width: 100%;
+}
+.profile-post-modal {
+    width: 100%;
+}
+.profile-post-modal .form-group {
+    display: grid;
+    width: 100%;
+}
+.profile-post-modal .form-group #img-preview {
+    padding-top: 10px;
+    width: 100%;
+    max-width: 531px;
+    height: 100%;
+    max-height: 279px;
+    border-radius: 0;
+}
+.profile-post-modal img {
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+.iziModal .iziModal-header-icon {
+    color: rgba(255, 255, 255, 0.8);
+}
+.iziModal .iziModal-header-subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    line-height: 1.45;
+    font-weight: bold;
+}
+/* Button */
+.btn-primary {
+    /* background-color: rgba(138, 144, 255, 0.9); */
+    border: #ddd;
+    background-image: -webkit-linear-gradient(0deg, #828fff 0%, #d496ff 100%);
+    color: white;
+    font-size: 12pt;
+    font-family: LibSans;
+}
+
+.btn-primary:hover {
+    border: 1px solid;
+    border-color: rgba(138, 144, 255, 0.9);
+    background-image: linear-gradient(white, white);
+    color: rgba(138, 144, 255, 0.9);
+    font-family: LibSans;
+}
+.btn-light {
+    font-family: LibSans;
+    background-color: #e2e6ea;
+    border-color: #dae0e5;
+}
+.btn-light:hover {
+    color: #212529;
+    background-color: #f8f9fa;
+    border-color: #dae0e5;
+}
+/* Form Error*/
+.form-group.has-error .form-control,
+.form-group.has-error .input-group-addon,
+.form-group.has-error .form-control#description:focus {
+    color: #dd4b39;
+    border: 1px #dd4b39 solid;
+    box-shadow: none;
+}
+.form-group.has-error .help-block {
+    color: #dd4b39;
+}
+
+/* Order */
+.order-first {
+    -webkit-box-ordinal-group: 0;
+    -ms-flex-order: -1;
+    order: -1;
+}
+.order-last {
+    -webkit-box-ordinal-group: 14;
+    -ms-flex-order: 13;
+    order: 13;
+}
+.posts-kajian .single-widget {
+    border: 1px solid #eee;
+    padding: 10px 10px;
+    margin-bottom: 30px;
+}
+
+/* Media Screen */
+@media only screen and (max-width: 800px) {
+    .posts-kajian .single-widget {
+        border: 1px solid #eee;
+        padding: 10px 10px;
+        margin-bottom: 30px;
+        margin: 10px 10px !important;
+    }
+    .order-last {
+        -webkit-box-ordinal-group: 0;
+        -ms-flex-order: -1;
+        order: -1;
+    }
+    .order-first {
+        -webkit-box-ordinal-group: 14;
+        -ms-flex-order: 13;
+        order: 13;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .posts-kajian .single-widget {
+        border: 1px solid #eee;
+        padding: 0px 10px;
+    }
+    .sidebar {
+        display: grid;
+    }
+    .sidebar .search-widget {
+        order: 3;
+        -webkit-order: 3;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 20px;
+    }
+    .sidebar .protfolio-widget {
+        order: 1;
+        -webkit-order: 1;
+    }
+    .sidebar .category-widget {
+        order: 2;
+        -webkit-order: 2;
+    }
+}
+
+@media only screen and (max-width: 990px) {
+    .order-last {
+        -webkit-box-ordinal-group: 0;
+        -ms-flex-order: -1;
+        order: -1;
+    }
+    .sidebar {
+        display: grid;
+    }
+    .order-first {
+        -webkit-box-ordinal-group: 14;
+        -ms-flex-order: 13;
+        order: 13;
+    }
+    .sidebar .search-widget {
+        order: 3;
+        -webkit-order: 3;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 20px;
+    }
+    .sidebar .protfolio-widget {
+        order: 1;
+        -webkit-order: 1;
+    }
+    .sidebar .category-widget {
+        order: 2;
+        -webkit-order: 2;
+    }
 }

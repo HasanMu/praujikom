@@ -16,7 +16,7 @@
                     Al - Quran
                 </h1>
                 <p class="text-white link-nav">
-                    <a href="/">Home </a>
+                    <a href="/">Beranda </a>
                     <span class="lnr lnr-arrow-right"></span>
                     <a href="/al-quran"> Al-Quran</a></p>
             </div>
@@ -32,15 +32,7 @@
                 <div class="title text-center">
                     <h1 class="mb-10">Quran Surat</h1>
 
-                    <div class="single-price" id="FQS">
-                        <div class="top-part text-right">
-                            <div class="form-group row">
-                                <label for="cariQS" class="col-sm-2 col-form-label">Cari QS</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="cariQS" placeholder="Nama QS, Arti, Jenis (Mekah/Madinah)">
-                                </div>
-                            </div>
-                        </div>
+                    <div id="FQS">
                     </div>
 
 
@@ -53,9 +45,7 @@
 
         </div>
 
-        <div class="d-flex justify-content-between">
-            <a name="" id="" class="genric-btn primary circle arrow" href="#" role="button">AAA</a>
-            <a name="" id="" class="genric-btn primary circle arrow" href="#" role="button">AAA</a>
+        <div class="d-flex justify-content-between paging">
         </div>
     </div>
 </section>

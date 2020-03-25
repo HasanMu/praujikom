@@ -19,7 +19,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Spatie\Cors\Cors::class
+        \Fruitcake\Cors\HandleCors::class,
     ];
 
     /**
@@ -42,6 +42,7 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
         ],
+        'paths' => ['api/*'],
     ];
 
     /**

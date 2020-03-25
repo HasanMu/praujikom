@@ -124,6 +124,5 @@
     <script src="{{ asset('assets/fe/AdminLTE/plugins/iCheck/icheck.min.js') }}"></script>
     <script src="{{ asset('js/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('js/jquery-validation/additional-methods.min.js') }}"></script>
-    <script src="{{ asset('js/redux.min.js') }}"></script>
     <script src="{{ asset('js/frontend/profile.js') }}"></script>
 @endpush

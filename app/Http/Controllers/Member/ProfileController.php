@@ -16,18 +16,6 @@ class ProfileController extends Controller
 {
     public function profilePage(Request $request)
     {
-        if ($request->ajax()) {
-            if (Auth::check()) {
-                $response = [
-                    'message'   => 'berhasil',
-                    'data'      => Auth::user()
-                ];
-
-                return response()->json($response, 200);
-            } else {
-                return redirect('/login');
-            }
-        }
         return view('frontend.users/profile');
     }
     public function editProfile(Request $request)
@@ -131,5 +119,22 @@ class ProfileController extends Controller
         ];
 
         return response()->json($response, 200);
+    }
+
+    public function userData(Request $request)
+    {
+        if ($request->ajax()) {
+            if (Auth::check()) {
+                $response = [
+                    'success'   => true,
+                    'message'   => 'berhasil',
+                    'data'      => Auth::user()
+                ];
+
+                return response()->json($response, 200);
+            } else {
+                return redirect('/login');
+            }
+        }
     }
 }
