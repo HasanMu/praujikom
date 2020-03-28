@@ -38,23 +38,26 @@ Route::get('/kajian/1', function () {
 /**
  * GET USER DATA - Frontend
  */
-Route::get('user/data', function () {
-    if (Auth::check()) {
-        $response = [
-            'success'   => true,
-            'message'   => 'berhasil',
-            'data'      => Auth::user()
-        ];
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('user/data', function () {
+        if (Auth::check()) {
+            $response = [
+                'success'   => true,
+                'message'   => 'berhasil',
+                'data'      => Auth::user(),
+                'kajian'    => Auth::user()->post
+            ];
 
-        return response()->json($response, 200);
-    } else {
-        $response = [
-            'success'   => false,
-            'message'   => 'Kamu belum masuk',
-            'data'      => '',
-        ];
-        return response()->json($response, 200);
-    }
+            return response()->json($response, 200);
+        } else {
+            $response = [
+                'success'   => false,
+                'message'   => 'Kamu belum masuk',
+                'data'      => '',
+            ];
+            return response()->json($response, 200);
+        }
+    });
 });
 
 Auth::routes();
@@ -186,6 +189,13 @@ Route::group(['prefix' => 'api/v1/'], function () {
 
             return response()->json($response, 200);
         });
+    });
+
+    /**
+     * API KAJIAN
+     */
+    Route::group(['prefix' => '/kajian'], function () {
+        Route::get('/', 'Member\KajianController@apiAllKajian');
     });
 
 });

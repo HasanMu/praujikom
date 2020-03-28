@@ -14,17 +14,6 @@ class KajianController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $data_kajian = Post::with('user')->get();
-
-            $response = [
-                'success'   =>  $data_kajian->count() ? true : false,
-                'message'   => $data_kajian->count() ? 'data berhasil' : 'Belum ada daftar Kajian!',
-                'data'      => $data_kajian,
-            ];
-
-            return response()->json($response, 200);
-        }
         return view('frontend.kajian.kumpulan-kajian');
     }
 
@@ -68,6 +57,20 @@ class KajianController extends Controller
             'success'   => true,
             'title'     => 'Bagus',
             'message'   => 'Kajian baru telah dibuat!',
+        ];
+
+        return response()->json($response, 200);
+    }
+
+    public function apiAllKajian()
+    {
+        $data_kajian = Post::with('user')->get();
+
+        $response = [
+            'success'   =>  $data_kajian->count() ? true : false,
+            'message'   => $data_kajian->count() ? 'data berhasil' : 'Belum ada daftar Kajian!',
+            'data'      => $data_kajian,
+            'lenght'    => $data_kajian->count()
         ];
 
         return response()->json($response, 200);

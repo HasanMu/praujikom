@@ -218,7 +218,7 @@ $(function() {
     getData();
     function getData() {
         $.ajax({
-            url: "",
+            url: "/api/v1/kajian",
             method: "GET",
             beforeSend: () => {
                 $(".posts-kajian").html("");
@@ -229,8 +229,10 @@ $(function() {
                 );
             },
             success: res => {
-                // console.log(res);
+
                 $(".posts-kajian").html("");
+                let imgProfileModal = $(".modal-profile-img");
+
                 const _postKajian = $(".posts-kajian");
                 if (!res.success) {
                     $.ajax({
@@ -260,8 +262,18 @@ $(function() {
                 } else {
 
                     $.each(res.data, (k, v) => {
+                        // console.log(v);
+
                         let user = v.user;
                         let post = v;
+
+                        let $isLogin = isLogin(v);
+
+                        imgProfileModal.attr(
+                            "src",
+                            "/assets/images/users/" + user.image
+                        ).attr("alt", user.name);
+
 
                         _postKajian.append(
                             `
@@ -277,17 +289,7 @@ $(function() {
                                             <h6>${user.name}</h6>
                                             <p>${dateTF(user.created_at)}</p>
                                         </div>
-                                        <div class="nav-post-right">
-                                            <a href="javascript:void(0)" class="" id="dropdownMenuLink" data-toggle="dropdown">
-                                                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                                            </a>
-
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </div>
+                                        ` + $isLogin +`
                                     </div>
                                     <img class="img-fluid banner-post" src="/assets/images/posts/${
                                         post.image
@@ -357,5 +359,62 @@ $(function() {
         ] = dtf.formatToParts(d);
 
         return `${da} ${mo} ${ye}, ${ho}:${mi}`;
+    }
+
+    function isLogin(post) {
+        $.ajax({
+            url: "/profile/data",
+            method: "GET",
+            dataType: "JSON",
+            success: res => {
+                if (!res.success) {
+                    console.log(res);
+                } else {
+                    if (post.user_id === res.data.id) {
+
+                        let data = `
+                                <div class="nav-post-right">
+                                    <a href="javascript:void(0)" class="" id="dropdownMenuLink" data-toggle="dropdown">
+                                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                    </a>
+
+                                    <div class="dropdown-menu setting-post" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>Hapus
+                                        </a>
+                                    </div>
+                                </div>
+                                `;
+
+                        return data;
+                    }
+                    return "";
+                }
+            },
+            error: err => {
+                // console.log(err);
+                if (err.status === 401) {
+                    return `
+                                <div class="nav-post-right">
+                                    <a href="javascript:void(0)" class="" id="dropdownMenuLink" data-toggle="dropdown">
+                                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                    </a>
+
+                                    <div class="dropdown-menu setting-post" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Ubah
+                                        </a>
+                                        <a class="dropdown-item" href="#">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>Hapus
+                                        </a>
+                                    </div>
+                                </div>
+                                `;
+                }
+            }
+        });
     }
 });

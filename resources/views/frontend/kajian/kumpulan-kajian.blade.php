@@ -9,7 +9,7 @@
     <form id="form" enctype="multipart/form-data">
         <div class="modal-body">
             <div class="profile-post-modal">
-                <img class="img-fluid" src="{{ asset('assets/fe/robotics/img/blog/p1.jpg') }}" alt="" style="height: 45px; width: 45px;">
+                <img class="img-fluid modal-profile-img" src="" alt="" style="height: 45px; width: 45px;">
                     <div class="form-group">
                         <textarea id="description" class="form-control" cols="5" rows="5" name="description" placeholder="Ketik kajian"></textarea>
                         <div class="d-flex">
