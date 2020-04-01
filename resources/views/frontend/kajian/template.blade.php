@@ -29,7 +29,7 @@
                         <p>
                             {{ Auth::user()->bio ? Auth::user()->bio : 'Belum ada bio' }}
                         </p>
-                        <a id="" class="primary-btn new-kajian" href="javascript:void(0);" role="button">Buat Kajian</a>
+                        <a id="" class="primary-btn post-add" href="javascript:void(0);" role="button">Buat Kajian</a>
                         <a id="" class="primary-btn" href="/profile" role="button">Profil</a>
                     @else
                         <h4>Hai! Selamat Datang</h4>

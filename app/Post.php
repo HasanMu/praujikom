@@ -10,4 +10,14 @@ class Post extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function city()
+    {
+        return $this->belongsTo('App\City', 'city_id');
+    }
+
+    public function district()
+    {
+        return $this->belongsTo('App\District', 'district_id');
+    }
 }

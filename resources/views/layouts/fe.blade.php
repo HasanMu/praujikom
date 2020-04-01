@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="{{ asset('assets/stisla220/assets/modules/fontawesome/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/iziModal.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/zoom.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/comment.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/custom-fe.css') }}">
 
 </head>

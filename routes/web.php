@@ -28,7 +28,6 @@ Route::get('/al-quran', function () {
 
 /* Route Kajian - Frontend */
 Route::get('/kajian', 'Member\KajianController@index')->name('kajian.index');
-Route::post('/kajian', 'Member\KajianController@baru')->name('kajian.baru');
 
 
 Route::get('/kajian/1', function () {
@@ -39,6 +38,8 @@ Route::get('/kajian/1', function () {
  * GET USER DATA - Frontend
  */
 Route::group(['middleware' => ['auth']], function () {
+    Route::post('/kajian', 'Member\KajianController@baru')->name('kajian.baru');
+    Route::post('/kajian/ubah', 'Member\KajianController@ubah')->name('kajian.ubah');
     Route::get('user/data', function () {
         if (Auth::check()) {
             $response = [

@@ -76,6 +76,15 @@
 .posts-kajian .single-post .content-post {
     font-family: LibSans;
 }
+.posts-kajian .single-widget .tags li a {
+    font-family: LibSansBold;
+    color: #959aff !important;
+    padding: 1em;
+}
+
+.single-widget .tags li a:hover{
+    color: #212529;
+}
 /*  */
 .nav-post {
     height: auto;
@@ -112,15 +121,15 @@
     width: 100%;
     text-align: right;
 }
-.nav-post .nav-post-right a i{
+.nav-post .nav-post-right a i {
     color: #212529;
 }
-.nav-post .nav-post-right .setting-post{
+.nav-post .nav-post-right .setting-post {
     margin: 22px 0 0 0;
     padding-top: 10px;
     box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
     background: #fff;
-    font-family: 'Poppins';
+    font-family: "Poppins";
     font-size: 12px;
     font-weight: 400;
 }
@@ -222,9 +231,28 @@
     border: 1px #dd4b39 solid;
     box-shadow: none;
 }
-.form-group.has-error .help-block {
+.form-group .help-block {
     color: #dd4b39;
 }
+
+/* Ui Comment */
+.ui.comments .comment .content .author {
+    font-family: LibSansBold;
+    font-size: 14px;
+}
+.ui.comments .comment .content .metadata {
+    font-family: LibSans;
+    font-size: 12px;
+}
+.ui.comments .comment .content .metadata .rating{
+    color: #828fff;
+}
+.ui.comments .comment .text {
+    font-family: LibSans;
+    font-size: 14px;
+}
+
+/* End Ui Comment*/
 
 /* Order */
 .order-first {
@@ -317,4 +345,13 @@
         order: 2;
         -webkit-order: 2;
     }
+}
+@media (max-width: 960px) {
+  #mobile-nav-toggle {
+    margin-top: -7px;
+    display: inline;
+  }
+  #nav-menu-container {
+    display: none;
+  }
 }

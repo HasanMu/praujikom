@@ -123,7 +123,7 @@ class ProfileController extends Controller
 
     public function userData(Request $request)
     {
-        if ($request->ajax()) {
+
             if (Auth::check()) {
                 $response = [
                     'success'   => true,
@@ -135,6 +135,5 @@ class ProfileController extends Controller
             } else {
                 return redirect('/login');
             }
-        }
     }
 }
