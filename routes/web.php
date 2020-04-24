@@ -97,7 +97,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::get('/users', 'Admin\AdminController@users')->name('admin.users');
     Route::post('/users', 'Admin\AdminController@usersPOST')->name('admin.users.add');
     Route::delete('/users', 'Admin\AdminController@usersDELETE')->name('admin.users.delete');
-    Route::get('/task-scheduller', 'Admin\AdminController@taks')->name('admin.taks');
+    # Taks
+    Route::get('/task-scheduller', 'Admin\AdminController@task')->name('admin.task');
+    Route::post('/task-scheduller', 'Admin\AdminController@taskPOST')->name('admin.task.add');
+    Route::delete('/task-scheduller', 'Admin\AdminController@taskDELETE')->name('admin.task.delete');
 });
 
 // Member Route

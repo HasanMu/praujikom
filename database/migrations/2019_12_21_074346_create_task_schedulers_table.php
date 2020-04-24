@@ -15,10 +15,8 @@ class CreateTaskSchedulersTable extends Migration
     {
         Schema::create('task_schedulers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->text('description');
-            $table->foreign('user_id')->references('id')->on('users')->nullable();
             $table->timestamps();
         });
     }

@@ -21,9 +21,9 @@
                 </a>
             </li>
 
-            <li class="{{ (request()->is('admin/task-scheduler')) ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('admin.taks') }}">
-                    <i class="fas fa-clipboard-list"></i> <span>Jadwal Pekerjaan</span>
+            <li class="{{ (request()->is('admin/task-scheduller')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('admin.task') }}">
+                    <i class="fas fa-clipboard-list"></i> <span>Info untuk Member</span>
                 </a>
             </li>
 

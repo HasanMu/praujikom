@@ -101,30 +101,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($posts as $post)
-                                <tr>
-                                    <td>
-                                        @if ($post->image)
-                                        <img class="img-fluid" src="/assets/images/posts/{{ $post->image }}" alt="{{ $post->user->name }}" style="height: 50px; width: 50px;">
-                                        @else
-                                        <p>Belum ada foto</p>
-                                        @endif
-                                        {{-- <div class="table-links">
-                                            in <a href="#">Web Development</a>
-                                            <div class="bullet"></div>
-                                            <a href="#">View</a>
-                                        </div> --}}
-                                    </td>
-                                    <td>
-                                        <p class="font-weight-600">
-                                            <img src="/assets/images/users/{{ $post->user->image ? $post->user->image : 'default-avatar.jpg' }}" alt="avatar" class="rounded-circle mr-1" width="30"> {{ $post->user->name }}</p>
-                                    </td>
-                                    <td>
-                                        <a class="btn btn-info btn-action mr-1" data-toggle="tooltip" title="" data-original-title="Lihat" href="/kajian/{{ $post->id }}"><i class="fas fa-eye"></i></a>
-                                    </td>
-                                </tr>
-                            @endforeach
-
+                            @if ($posts->count() > 0)
+                                @foreach ($posts as $post)
+                                    <tr>
+                                        <td>
+                                            @if ($post->image)
+                                            <img class="img-fluid" src="/assets/images/posts/{{ $post->image }}" alt="{{ $post->user->name }}" style="height: 50px; width: 50px;">
+                                            @else
+                                            <p>Belum ada foto</p>
+                                            @endif
+                                            {{-- <div class="table-links">
+                                                in <a href="#">Web Development</a>
+                                                <div class="bullet"></div>
+                                                <a href="#">View</a>
+                                            </div> --}}
+                                        </td>
+                                        <td>
+                                            <p class="font-weight-600">
+                                                <img src="/assets/images/users/{{ $post->user->image ? $post->user->image : 'default-avatar.jpg' }}" alt="avatar" class="rounded-circle mr-1" width="30"> {{ $post->user->name }}</p>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-info btn-action mr-1" data-toggle="tooltip" title="" data-original-title="Lihat" href="/kajian/{{ $post->id }}"><i class="fas fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                             <tr>
+                                 <td colspan="3" class="text-center">Belum ada data kajian</td>
+                             </tr>
+                             @endif
                         </tbody>
                     </table>
                 </div>

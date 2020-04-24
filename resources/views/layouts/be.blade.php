@@ -58,6 +58,8 @@
 
             @if (Request::segment(2) == 'users')
                 @include('admin.users/modal')
+            @elseif(Request::segment(2) == 'task-scheduller')
+                @include('admin.task/modal')
             @endif
 
             <footer class="main-footer">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\TaskScheduler;
 use App\User;
 use DataTables;
 use Illuminate\Http\Request;
@@ -69,10 +70,55 @@ class AdminController extends Controller
         return response()->json($response, 200);
     }
 
-    public function taks(Request $request)
-    {
-        $users = User::orderBy('created_at', 'desc')->get();
+    /**
+     * @param Task\Bagian
+     */
 
-        return view('admin.users/index', compact('users'));
+    public function task(Request $request)
+    {
+        if ($request->ajax()) {
+
+            $data = TaskScheduler::orderBy('created_at', 'desc')->get();
+
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                $btn = '<button type="button" id="info-info" class="btn btn-info" data-id="' . $row->id . '" data-title="' . $row->title . '" data-description="' . $row->description . '"><i class="fa fa-eye"></i></button>';
+                    $btn .= ' <button type="button" id="btn-delete" class="btn btn-danger" data-id="' . $row->id . '"><i class="far fa-trash-alt"></i></button>';
+
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('admin.task/index');
+    }
+
+    public function taskPOST(Request $request)
+    {
+        $task = new TaskScheduler;
+        $task->title = $request['title'];
+        $task->description = $request['description'];
+        $task->save();
+
+        $response = [
+            'msg'  => 'Berhasil',
+        ];
+
+        return response()->json($response, 200);
+    }
+
+    public function taskDELETE(Request $request)
+    {
+        $task = TaskScheduler::findOrFail($request->id);
+        $task->delete();
+
+        $response = [
+            'msg'  => 'Berhasil',
+        ];
+
+        return response()->json($response, 200);
     }
 }
