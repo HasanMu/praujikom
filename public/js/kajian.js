@@ -4,11 +4,14 @@ $(function() {
 var base_url = window.location.origin;
 let $dataPOST = false;
 let d_image = null;
+var pId = [];
+let hD = '';
 
     /* Setting CSRF TOKEN */
     $.ajaxSetup({
         headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            "Access-Control-Allow-Origin": "*"
         }
     });
 
@@ -319,6 +322,98 @@ let d_image = null;
         });
     }
 
+    /* Show Comments */
+    function showComments(idP, comment) {
+        $('body').on('click', "#comments-post-" + idP, function() {
+            let getHTML = $("#comments-" + idP);
+
+            // if (getHTML.hasClass('collapsed')) {
+            //     getHTML.removeClass('collapsed')
+            // } else {
+            //     getHTML.addClass("collapsed");
+            // }
+        });
+
+    }
+    /* End Show Comments */
+
+    /*
+        function pComments(v, id) {
+            // $.each(res.data, (k, v) => {
+                if (v.post_id == id) {
+                    let user = v.user;
+                    let post = v.post;
+                    console.log(v);
+                    hD = `
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="/assets/images/users/${user.image}">
+                        </a>
+                        <div class="content">
+                            <a class="author">${handleHTML(user.name)}</a>
+                            <div class="metadata">
+                                <div class="date">${dateTF(v.created_at)}</div>
+                                ${post.user_id == v.user_id ? `<div class="rating"><i class="fa fa-star" aria-hidden="true"></i> Author</div>` : ''}
+                            </div>
+                            <div class="text">
+                                Hey guys, I hope this example comment is helping you read this documentation.
+                            </div>
+                        </div>
+                    </div>
+                `;
+                } else {
+                    hD = '<p class="text-center">Belum ada komentar!</p>';
+                }
+            // });
+        }
+    */
+
+    isCommentPost = (postid) => {
+        $.ajax({
+            url: base_url + "/api/v1/komentar/posts",
+            method: "GET",
+            async: false,
+            success: res => {
+                // console.log(res.data);
+
+                $.each(res.data, (k, v) => {
+                    // pComments(v, postid)
+                    if (v.post_id == postid) {
+                        let user = v.user;
+                        let post = v.post;
+                        console.log(res.data);
+
+                        hD = `
+                            <div class="comment">
+                                <a class="avatar">
+                                    <img src="/assets/images/users/${user.image}">
+                                </a>
+                                <div class="content">
+                                    <a class="author">${handleHTML(user.name)}</a>
+                                    <div class="metadata">
+                                        <div class="date">${dateTF(v.created_at)}</div>
+                                        ${
+                                            post.user_id == v.user_id
+                                                ? `<div class="rating"><i class="fa fa-star" aria-hidden="true"></i> Author</div>`
+                                                : ""
+                                        }
+                                    </div>
+                                    <div class="text">
+                                        Hey guys, I hope this example comment is helping you read this documentation.
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        hD = '<p class="text-center">Belum ada komentar!</p>';
+                    }
+                })
+            }
+        });
+
+        return hD;
+    }
+
     /**
      * GET Data Kajian
      */
@@ -371,75 +466,74 @@ let d_image = null;
                         // console.log(v);
 
                         let user = v.user;
+                        let comment = v.comment
                         let post = v;
 
                         editData(post)
+                        showComments(post.id, comment)
 
                         _postKajian.append(
                             `
-                        <div class="single-widget">
-                            <div class="post-list blog-post-list mb-10">
-                                <div class="single-post">
+                                <div class="single-widget">
+                                    <div class="post-list blog-post-list mb-10">
+                                        <div class="single-post">
 
-                                    <div class="nav-post">
-                                        <img class="img-fluid" src="/assets/images/users/${
-                                            user.image
-                                                ? handleHTML(user.image)
-                                                : "default-avatar.jpg"
-                                        }" alt="" style="height: 45px; width: 45px;">
-                                        <div class="nav-post-profile">
-                                            <h6>${handleHTML(user.name)}</h6>
-                                            <p>${dateTF(post.created_at)}</p>
-                                        </div>
-                                        ${
-                                            post.poster
-                                                ? KajianAction().dropdownPoster(
-                                                      post
-                                                  )
-                                                : ""
-                                        }
-                                    </div>
-                                    ${KajianAction().getImg(post)}
-                                    ${KajianAction().getLoc(post)}
-                                        <p class="content-post">
-                                        ${handleHTML(post.description)}
-                                        </p>
-                                    <div class="bottom-meta">
-                                        <div class="user-details row align-items-center">
-                                            <div class="comment-wrap col-lg-6">
-                                                <ul>
-                                                    <li><a href="#"><span class="lnr lnr-bubble"></span> 06 Comments</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="ui comments">
-                                        <div class="comment">
-                                            <a class="avatar">
-                                                <img src="/assets/images/users/${handleHTML(
+                                            <div class="nav-post">
+                                                <img class="img-fluid" src="/assets/images/users/${
                                                     user.image
-                                                )}">
-                                            </a>
-                                            <div class="content">
-                                                <a class="author">Stevie Feliciano</a>
-                                                <div class="metadata">
-                                                    <div class="date">2 days ago</div>
-                                                    <div class="rating">
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                                        5 Faves
+                                                        ? handleHTML(
+                                                                user.image
+                                                            )
+                                                        : "default-avatar.jpg"
+                                                }" alt="" style="height: 45px; width: 45px;">
+                                                <div class="nav-post-profile">
+                                                    <h6>${handleHTML(
+                                                        user.name
+                                                    )}</h6>
+                                                    <p>${dateTF(
+                                                        post.created_at
+                                                    )}</p>
+                                                </div>
+                                                ${
+                                                    post.poster
+                                                        ? KajianAction().dropdownPoster(
+                                                                post
+                                                            )
+                                                        : ""
+                                                }
+                                            </div>
+                                            ${KajianAction().getImg(
+                                                post
+                                            )}
+                                            ${KajianAction().getLoc(
+                                                post
+                                            )}
+                                                <p class="content-post">
+                                                ${handleHTML(
+                                                    post.description
+                                                )}
+                                                </p>
+                                            <div class="bottom-meta">
+                                                <div class="user-details row align-items-center">
+                                                    <div class="comment-wrap col-lg-6">
+                                                        <ul>
+                                                            <li><a href="/kajian/${post.id}" id="comments-post-${
+                                                                post.id
+                                                            }"><span class="lnr lnr-bubble"></span> ${post.comment.length} komentar</a></li>
+                                                        </ul>
                                                     </div>
+                                                </div>
                                             </div>
-                                            <div class="text">
-                                                Hey guys, I hope this example comment is helping you read this documentation.
-                                            </div>
+                                            <div class="ui collapsed threads comments" id="comments-${
+                                                post.id
+                                            }">
+                                                <hr class="ui diving headers">
+                                                ${isCommentPost(post.id)}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    `
+                            `
                         );
                     });
                 }

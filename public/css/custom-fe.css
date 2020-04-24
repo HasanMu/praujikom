@@ -239,6 +239,7 @@
 .ui.comments .comment .content .author {
     font-family: LibSansBold;
     font-size: 14px;
+    font-weight: 500;
 }
 .ui.comments .comment .content .metadata {
     font-family: LibSans;

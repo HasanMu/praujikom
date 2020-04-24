@@ -11,6 +11,9 @@
 |
 */
 
+use App\Comment;
+use App\Post;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -30,8 +33,31 @@ Route::get('/al-quran', function () {
 Route::get('/kajian', 'Member\KajianController@index')->name('kajian.index');
 
 
-Route::get('/kajian/1', function () {
-    return view('frontend.kajian.single-kajian');
+Route::get('/kajian/{id}', function ($id) {
+    $post = Post::with('comment', 'user', 'city', 'district')->findOrFail($id);
+
+    return view('frontend.kajian.single-kajian', compact('post'));
+});
+
+/* Route Post */
+Route::post('/kajian/{id}/comment/add', function (Request $request, $id) {
+
+    $new_comment = new Comment();
+
+    $new_comment->content = $request->content;
+    $new_comment->post_id = $id;
+    $new_comment->user_id = $request->user_id;
+    $new_comment->save();
+
+    return redirect()->back();
+});
+
+/* Route Deelete */
+Route::delete('/kajian/comment/{id}', function ($id) {
+
+    $delete_comment = Comment::findOrFail($id)->delete();
+
+    return redirect()->back();
 });
 
 /**
@@ -67,9 +93,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // Admin Route
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
-    Route::get('/home', function () {
-        return view('admin.home');
-    })->name('home.admin');
+    Route::get('/home', 'Admin\AdminController@index')->name('home.admin');
+    Route::get('/users', 'Admin\AdminController@users')->name('admin.users');
+    Route::post('/users', 'Admin\AdminController@usersPOST')->name('admin.users.add');
+    Route::delete('/users', 'Admin\AdminController@usersDELETE')->name('admin.users.delete');
+    Route::get('/task-scheduller', 'Admin\AdminController@taks')->name('admin.taks');
 });
 
 // Member Route
@@ -78,6 +106,10 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
     Route::get('/profile/data', 'Member\ProfileController@userData'); // User Data - Login
     Route::post('/profile', 'Member\ProfileController@editProfile')->name('editProfile');
     Route::post('/profile/security', 'Member\ProfileController@editPassword')->name('editPassword');
+
+    # PostiganKu Route
+
+    Route::get('/myposts', 'Member\ProfileController@postingankuPage');
 });
 
 Route::group(['prefix' => 'api/v1/'], function () {
@@ -197,6 +229,29 @@ Route::group(['prefix' => 'api/v1/'], function () {
      */
     Route::group(['prefix' => '/kajian'], function () {
         Route::get('/', 'Member\KajianController@apiAllKajian');
+    });
+
+    Route::group(['prefix' => '/komentar'], function () {
+        Route::get('/posts', function () {
+            $data = Comment::with('user', 'post')->get();
+
+            $response = [
+                'message'   => 'Data komentar!',
+                'data'      => $data
+            ];
+
+            return response()->json($response, 200);
+        });
+        Route::get('/post/{post_id}', function ($post_id) {
+            $data = Comment::with('user', 'post')->where('post_id', $post_id)->get();
+
+            $response = [
+                'message'   => 'Data komentar!',
+                'data'      => $data
+            ];
+
+            return response()->json($response, 200);
+        });
     });
 
 });

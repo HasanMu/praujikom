@@ -23,6 +23,7 @@
     <!--
         CSS
         ============================================= -->
+        @yield('css')
     <link href="{{ asset('assets/fe/robotics/js/select2-4.0.13/dist/css/select2.min.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/fe/robotics/css/linearicons.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/fe/robotics/css/font-awesome.min.css') }}">

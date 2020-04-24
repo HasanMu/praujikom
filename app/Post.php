@@ -20,4 +20,9 @@ class Post extends Model
     {
         return $this->belongsTo('App\District', 'district_id');
     }
+
+    public function comment()
+    {
+        return $this->hasMany('App\Comment', 'post_id');
+    }
 }

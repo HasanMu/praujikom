@@ -16,13 +16,13 @@
             {{-- Menus --}}
 
             <li class="{{ (request()->is('admin/users')) ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('home.admin') }}">
+                <a class="nav-link" href="{{ route('admin.users') }}">
                     <i class="fas fa-users"></i> <span>Pengguna</span>
                 </a>
             </li>
 
             <li class="{{ (request()->is('admin/task-scheduler')) ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('home.admin') }}">
+                <a class="nav-link" href="{{ route('admin.taks') }}">
                     <i class="fas fa-clipboard-list"></i> <span>Jadwal Pekerjaan</span>
                 </a>
             </li>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Post;
 use Illuminate\Http\Request;
 use App\User;
 use DateTime;
@@ -135,5 +136,18 @@ class ProfileController extends Controller
             } else {
                 return redirect('/login');
             }
+    }
+
+    /**
+     * ========================
+     * @param Postinganku
+     * ===================
+     */
+
+    public function postingankuPage()
+    {
+        $posts = Post::with('user', 'comment', 'city', 'district')->where('user_id', Auth::user()->id)->get();
+
+        return view('frontend.users/postingaku', compact('posts'));
     }
 }

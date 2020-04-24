@@ -6,6 +6,9 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>@yield('title') &mdash; Muslim Society</title>
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/stisla220/assets/modules/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/stisla220/assets/modules/fontawesome/css/all.min.css') }}">
@@ -53,9 +56,13 @@
                 </section>
             </div>
 
+            @if (Request::segment(2) == 'users')
+                @include('admin.users/modal')
+            @endif
+
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy; 2018 <div class="bullet"></div> Muslim Society
+                    Copyright &copy; 2020 <div class="bullet"></div> Muslim Society
                 </div>
                 <div class="footer-right">
 

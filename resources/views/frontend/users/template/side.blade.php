@@ -24,14 +24,10 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-circle-o"></i>Log Aktivitas</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Postinganku</a></li>
+                    <li><a href="/myposts"><i class="fa fa-circle-o"></i>Postinganku</a></li>
                 </ul>
             </li>
-            <li class="active"><a href="https://adminlte.io/docs"><i class="fa fa-user"></i> <span>Profil</span></a></li>
-            <li class="header">LABELS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+            <li class="active"><a href="/profile"><i class="fa fa-user"></i> <span>Profil</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->

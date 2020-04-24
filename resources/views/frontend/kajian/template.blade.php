@@ -11,17 +11,19 @@
         <div class="row">
             @yield('konten')
             <div class="col-lg-4 sidebar order-last">
-                <div class="single-widget search-widget">
-                    <form class="example" action="#" style="margin:auto;max-width:300px">
-                        <input type="text" placeholder="Cari Kajian" name="search2">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
-                </div>
+                @if (Request::segment(99))
+                    <div class="single-widget search-widget">
+                        <form class="example" action="#" style="margin:auto;max-width:300px">
+                            <input type="text" placeholder="Cari Kajian" name="search2">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
+                @endif
 
                 <div class="single-widget protfolio-widget">
                     @if (Auth::check())
                         @if (Auth::user()->image)
-                            <img src="{{ asset('assets/images/users'.Auth::user()->image) }}" class="img-fluid" alt="{{ Auth::user()->name }}" style="height: 125px; width: 125px;">
+                            <img src="{{ asset('assets/images/users/'.Auth::user()->image) }}" class="img-fluid" alt="{{ Auth::user()->name }}" style="height: 125px; width: 125px;">
                         @else
                             <img src="{{ asset('assets/images/users/default-avatar.jpg') }}" class="img-fluid" alt="{{ Auth::user()->name }}" style="height: 125px; width: 125px;">
                         @endif
@@ -29,7 +31,9 @@
                         <p>
                             {{ Auth::user()->bio ? Auth::user()->bio : 'Belum ada bio' }}
                         </p>
-                        <a id="" class="primary-btn post-add" href="javascript:void(0);" role="button">Buat Kajian</a>
+                        @if (!Request::segment(2))
+                            <a id="" class="primary-btn post-add" href="javascript:void(0);" role="button">Buat Kajian</a>
+                        @endif
                         <a id="" class="primary-btn" href="/profile" role="button">Profil</a>
                     @else
                         <h4>Hai! Selamat Datang</h4>
@@ -59,3 +63,7 @@
 @push('js')
     @stack('scripts')
 @endpush
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/input.min.css') }}">
+@endsection

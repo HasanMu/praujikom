@@ -114,8 +114,8 @@ class KajianController extends Controller
 
     public function apiAllKajian()
     {
-        $data_kajian = Post::with('user', 'city', 'district')->get();
-
+        $data_kajian = Post::with('user', 'city', 'district', 'comment')->get();
+        $datausr_ =
         $datas = [];
         $collections = collect($datas);
         foreach ($data_kajian as $key => $data) {
@@ -131,7 +131,8 @@ class KajianController extends Controller
                 'city'          => $data->city,
                 'created_at'    => $data->created_at,
                 'updated_at'    => $data->updated_at,
-                'poster'        => Auth::check() ? $data->user->id === Auth::user()->id ? true : false : false
+                'poster'        => Auth::check() ? $data->user->id === Auth::user()->id ? true : false : false,
+                'comment'       => $data->comment
             ]);
         }
 
