@@ -13,9 +13,13 @@
 
 use App\Comment;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 Route::get('/', function () {
     return view('frontend.home');
@@ -101,6 +105,47 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::get('/task-scheduller', 'Admin\AdminController@task')->name('admin.task');
     Route::post('/task-scheduller', 'Admin\AdminController@taskPOST')->name('admin.task.add');
     Route::delete('/task-scheduller', 'Admin\AdminController@taskDELETE')->name('admin.task.delete');
+    # Profile
+    Route::get('/profile', function () {
+        return view('admin.profile/index');
+    });
+    Route::post('/profile', function (Request $request) {
+        $profile = User::findOrFail(Auth::user()->id);
+        $date = new DateTime($request->dob);
+
+        $profile->name = $request->name;
+        $profile->gender = $request->gender;
+        $profile->dob = $date->format('Y-m-d');
+        $profile->address = $request->address;
+        $profile->bio = $request->bio;
+        # Foto
+        if ($request->hasFile('image-upload')) {
+            $file = $request->file('image-upload');
+            $path = public_path() . '/assets/images/users/';
+            $filename = Str::random(6) . '_' . $file->getClientOriginalName();
+            $upload = $file->move($path, $filename);
+
+            if ($profile->image && $profile->image != 'default-avatar.jpg') {
+                $old_image = $profile->image;
+                $filepath = public_path() . '/assets/images/users/' . $profile->image;
+                try {
+                    File::delete($filepath);
+                } catch (FileNotFoundException $e) {
+                    //Exception $e;
+                }
+            }
+            $profile->image = $filename;
+        }
+
+        $response = [
+            'success'   => true,
+            'title' => $profile->image,
+            'message' => "Data diri telah diperbarui"
+        ];
+
+        return response()->json($response, 200);
+
+    });
 });
 
 // Member Route
