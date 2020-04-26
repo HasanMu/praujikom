@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\TaskScheduler;
 use Illuminate\Http\Request;
 use App\User;
 use DateTime;
@@ -140,7 +141,7 @@ class ProfileController extends Controller
 
     /**
      * ========================
-     * @param Postinganku
+     * @param Postinganku & @param Info
      * ===================
      */
 
@@ -149,5 +150,12 @@ class ProfileController extends Controller
         $posts = Post::with('user', 'comment', 'city', 'district')->where('user_id', Auth::user()->id)->get();
 
         return view('frontend.users/postingaku', compact('posts'));
+    }
+
+    public function infoPage()
+    {
+        $info = TaskScheduler::orderBy('created_at', 'desc')->get();
+
+        return view('frontend.users/info', compact('info'));
     }
 }

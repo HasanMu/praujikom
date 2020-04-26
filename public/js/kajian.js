@@ -124,7 +124,7 @@ let hD = '';
                     : element.insertAfter(e);
             },
             submitHandler: function(form) {
-                let formData = FormData($(form)[0]);
+                let formData = new FormData($(form)[0]);
                 let userId;
 
                 $.ajax({
@@ -458,6 +458,15 @@ let hD = '';
                             `
                                 );
                             }
+                        },
+                        error: (error) => {
+                            _postKajian.append(
+                                `
+                                    <div class="single-widget">
+                            <p class="posts-not-found mt-10">${'Belum ada kajian'}</p>
+                            </div>
+                            `
+                            );
                         }
                     });
                 } else {

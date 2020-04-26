@@ -80,7 +80,10 @@
     </div>
 </div>
 
-
+@php
+    use Illuminate\Support\Str;
+    $info = \App\TaskScheduler::orderBy('created_at', 'desc')->get();
+@endphp
 <div class="row">
     <div class="col-lg-8 col-md-12 col-12 col-sm-12">
         <div class="card">
@@ -143,42 +146,28 @@
         </div>
         <div class="card-body">
             <ul class="list-unstyled list-unstyled-border">
-            <li class="media">
-                <img class="mr-3 rounded-circle" src="{{ asset('assets/stisla220/assets/img/avatar/avatar-1.png') }}" alt="avatar" width="50">
-                <div class="media-body">
-                <div class="float-right text-primary">Now</div>
-                <div class="media-title">Farhan A Mujib</div>
-                <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                </div>
-            </li>
-            <li class="media">
-                <img class="mr-3 rounded-circle" src="{{ asset('assets/stisla220/assets/img/avatar/avatar-2.png') }}" alt="avatar" width="50">
-                <div class="media-body">
-                <div class="float-right">12m</div>
-                <div class="media-title">Ujang Maman</div>
-                <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                </div>
-            </li>
-            <li class="media">
-                <img class="mr-3 rounded-circle" src="{{ asset('assets/stisla220/assets/img/avatar/avatar-3.png') }}" alt="avatar" width="50">
-                <div class="media-body">
-                <div class="float-right">17m</div>
-                <div class="media-title">Rizal Fakhri</div>
-                <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                </div>
-            </li>
-            <li class="media">
-                <img class="mr-3 rounded-circle" src="{{ asset('assets/stisla220/assets/img/avatar/avatar-4.png') }}" alt="avatar" width="50">
-                <div class="media-body">
-                <div class="float-right">21m</div>
-                <div class="media-title">Alfa Zulkarnain</div>
-                <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                </div>
-            </li>
+                @if ($info->count() > 0)
+                    @foreach ($info as $data)
+                    <li class="media">
+                        <div class="media-body">
+                            <div class="float-right text-primary">{{ $data->created_at->diffForHumans() }}</div>
+                            <div class="media-title">{{ $data->title }}</div>
+                            <span class="text-small text-muted">{{ Str::words($data->description, 15, '...') }}</span>
+                        </div>
+                    </li>
+                    @endforeach
+                @else
+                    <li class="media">
+                        <div class="media-body">
+                            <div class="media-title text-muted text-center">{{ "Belum ada info" }}</div>
+                        </div>
+                    </li>
+                @endif
+
             </ul>
             <div class="text-center pt-1 pb-1">
-            <a href="#" class="btn btn-primary btn-lg btn-round">
-                View All
+            <a href="/admin/task-scheduller" class="btn btn-primary btn-lg btn-round">
+                Atur
             </a>
             </div>
         </div>

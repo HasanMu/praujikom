@@ -14,9 +14,7 @@
                         Muslim Society
                     </h1>
                     <p class="text-white">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                        Quam labore velit et porro pariatur quo, ea dignissimos accusantium.
-                        Temporibus, nisi?
+                        Muslim Society adalah sebuah aplikasi yang dapat menjadi tempat bertukarnya informasi antar kaum muslimin. dengan memberikan sebuah informasi rinci terkait suatu acara kajian, dll.
                     </p>
                     @guest
                         <a href="/register" class="primary-btn header-btn text-uppercase">Gabung Sekarang</a>
@@ -69,7 +67,7 @@
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed doeiusmo d tempor incididunt ut labore et dolore magna aliqua.
                     </p>
-                    <a class="primary-btn" href="#">Download</a>
+                    <a class="primary-btn" href="https://play.google.com/store/apps/details?id=smk.assalaam.doaistighasah">Download</a>
                 </div>
                 <div class="col-lg-6 home-about-right no-padding justify-content-center align-items-center d-flex relative">
                     <div class="overlay overlay-bg"></div>
@@ -126,58 +124,74 @@
     </section>
     <!-- End jadwal sholat Area -->
 
-    <!-- Start post Area -->
-    <section class="blog-area section-gap">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-12 pb-40 header-text text-center">
-                    <h1 class="pb-10">Kajian Terbaru</h1>
-                    <p>
-                        Jadwal kajian terbaru!
-                    </p>
+    @php
+        use Illuminate\Support\Str;
+        $posts = \App\Post::with('user', 'district', 'city')->take(2)->get();
+    @endphp
+
+    @if ($posts->count() > 0)
+        <!-- Start post Area -->
+            <section class="blog-area section-gap">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-12 pb-40 header-text text-center">
+                            <h1 class="pb-10">Kajian Terbaru</h1>
+                            <p>
+                                Jadwal kajian terbaru!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @php
+                            $side = ['left', 'right'];
+                            $no = 0;
+                        @endphp
+                        @foreach ($posts as $data)
+                        <div class="col-lg-6 col-md-6 blog-{{ $side[$no++] }}">
+                            <div class="thumb">
+                                @if ($data->image)
+                                    <img class="img-fluid" src="{{ asset('assets/images/posts/'.$data->image) }}" alt="" style="height: 283.5px; width: 540px;">
+                                @else
+                                    <img class="img-fluid" src="{{ asset('assets/images/posts/noimage.png') }}" alt="" style="height: 283.5px; width: 540px;">
+                                @endif
+                            </div>
+                            <div class="detais">
+                                @if ($data->city_id && $data->district_id)
+                                    <ul class="tags">
+                                        <li><a href="#">{{ $data->city->name }}</a></li> |
+                                        <li><a href="#">{{ $data->district->name}}</a></li>
+                                    </ul>
+                                @elseif($data->city_id)
+                                    <ul class="tags">
+                                        <li><a href="#">{{ $data->city->name }}</a></li> |
+                                    </ul>
+                                @elseif($data->district_id)
+                                    <ul class="tags">
+                                        <li><a href="#">{{ $data->city->name }}</a></li> |
+                                    </ul>
+                                @else
+                                <ul class="tags">
+                                    <br><p></p>
+                                </ul>
+                                @endif
+                                <a href="#">
+                                    <h4>{{ $data->user->name }}</h4>
+                                </a>
+                                <p>
+                                    {{ Str::words($data->description, '50', '...') }}
+                                </p>
+                                <p class="date">{{ $data->created_at->diffForHumans() }}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 blog-left">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('assets/fe/robotics/img/b1.jpg') }}" alt="">
-                    </div>
-                    <div class="detais">
-                        <ul class="tags">
-                            <li><a href="#">Bandung</a></li>
-                            <li><a href="#">Baleendah</a></li>
-                        </ul>
-                        <a href="#">
-                            <h4>Hasan Muhammad</h4>
-                        </a>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.
-                        </p>
-                        <p class="date">31st January, 2018</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 blog-right">
-                    <div class="thumb">
-                        <img class="img-fluid" src="{{ asset('assets/fe/robotics/img/b2.jpg') }}" alt="">
-                    </div>
-                    <div class="detais">
-                        <ul class="tags">
-                            <li><a href="#">Bandung</a></li>
-                            <li><a href="#">Dayeuhkolot</a></li>
-                        </ul>
-                        <a href="#">
-                            <h4>Harry C. H</h4>
-                        </a>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.
-                        </p>
-                        <p class="date">31st January, 2018</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End blog Area -->
+            </section>
+        <!-- End blog Area -->
+    @else
+
+    @endif
+
 @endsection
 
 @push('js')

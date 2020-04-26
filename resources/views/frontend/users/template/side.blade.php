@@ -15,7 +15,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="treeview">
+            <li class="treeview  {{ Request::segment(1) == 'myposts' ? 'active' : Request::segment(1) == 'info' ? 'active' : '' }}">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                     <span class="pull-right-container">
@@ -23,11 +23,11 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Log Aktivitas</a></li>
-                    <li><a href="/myposts"><i class="fa fa-circle-o"></i>Postinganku</a></li>
+                    <li {{ Request::segment(1) == 'info' ? 'class=active' : '' }}><a href="/info"><i class="fa fa-circle-o"></i>Info</a></li>
+                    <li {{ Request::segment(1) == 'myposts' ? 'class=active' : '' }}><a href="/myposts"><i class="fa fa-circle-o"></i>Postinganku</a></li>
                 </ul>
             </li>
-            <li class="active"><a href="/profile"><i class="fa fa-user"></i> <span>Profil</span></a></li>
+            <li class="{{ Request::segment(1) == 'profile' ? 'active' : '' }}"><a href="/profile"><i class="fa fa-user"></i> <span>Profil</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->

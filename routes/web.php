@@ -1,25 +1,10 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 use App\Comment;
 use App\Post;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 Route::get('/', function () {
     return view('frontend.home');
@@ -109,43 +94,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::get('/profile', function () {
         return view('admin.profile/index');
     });
-    Route::post('/profile', function (Request $request) {
-        $profile = User::findOrFail(Auth::user()->id);
-        $date = new DateTime($request->dob);
-
-        $profile->name = $request->name;
-        $profile->gender = $request->gender;
-        $profile->dob = $date->format('Y-m-d');
-        $profile->address = $request->address;
-        $profile->bio = $request->bio;
-        # Foto
-        if ($request->hasFile('image-upload')) {
-            $file = $request->file('image-upload');
-            $path = public_path() . '/assets/images/users/';
-            $filename = Str::random(6) . '_' . $file->getClientOriginalName();
-            $upload = $file->move($path, $filename);
-
-            if ($profile->image && $profile->image != 'default-avatar.jpg') {
-                $old_image = $profile->image;
-                $filepath = public_path() . '/assets/images/users/' . $profile->image;
-                try {
-                    File::delete($filepath);
-                } catch (FileNotFoundException $e) {
-                    //Exception $e;
-                }
-            }
-            $profile->image = $filename;
-        }
-
-        $response = [
-            'success'   => true,
-            'title' => $profile->image,
-            'message' => "Data diri telah diperbarui"
-        ];
-
-        return response()->json($response, 200);
-
-    });
+    Route::post('/profile', 'Admin\AdminController@editProfile');
 });
 
 // Member Route
@@ -158,6 +107,7 @@ Route::group(['middleware' => ['auth', 'role:member']], function () {
     # PostiganKu Route
 
     Route::get('/myposts', 'Member\ProfileController@postingankuPage');
+    Route::get('/info', 'Member\ProfileController@infoPage');
 });
 
 Route::group(['prefix' => 'api/v1/'], function () {

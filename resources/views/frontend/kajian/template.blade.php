@@ -44,12 +44,17 @@
                     @endif
                 </div>
 
+                @php
+                    $cityPost = \App\City::withCount('post')->get();
+                @endphp
                 <div class="single-widget category-widget">
                     <h4 class="title">Daftar Kajian Perkota</h4>
                     <ul>
-                        <li><a href="#" class="justify-content-between align-items-center d-flex"><h6>Bandung</h6> <span>37</span></a></li>
-                        <li><a href="#" class="justify-content-between align-items-center d-flex"><h6>Garut</h6> <span>24</span></a></li>
-                        <li><a href="#" class="justify-content-between align-items-center d-flex"><h6>Jakarta</h6> <span>59</span></a></li>
+                        @foreach ($cityPost as $item)
+                            @if ($item->post_count > 0)
+                                <li><a class="justify-content-between align-items-center d-flex"><h6>{{ $item->name }}</h6> <span>{{ $item->post_count }}</span></a></li>
+                            @endif
+                        @endforeach
                     </ul>
                 </div>
 

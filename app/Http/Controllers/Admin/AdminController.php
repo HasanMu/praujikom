@@ -7,8 +7,13 @@ use App\Post;
 use App\TaskScheduler;
 use App\User;
 use DataTables;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -120,5 +125,47 @@ class AdminController extends Controller
         ];
 
         return response()->json($response, 200);
+    }
+
+    # Profile
+
+    public function editProfile(Request $request)
+    {
+        $profile = User::findOrFail(Auth::user()->id);
+        $date = new DateTime($request->dob);
+
+        $profile->name = $request->name;
+        $profile->gender = $request->gender;
+        $profile->dob = $date->format('Y-m-d');
+        $profile->address = $request->address;
+        $profile->bio = $request->bio;
+        # Foto
+        if ($request->hasFile('image-upload')) {
+            $file = $request->file('image-upload');
+            $path = public_path() . '/assets/images/users/';
+            $filename = Str::random(6) . '_' . $file->getClientOriginalName();
+            $upload = $file->move($path, $filename);
+
+            if ($profile->image && $profile->image != 'default-avatar.jpg') {
+                $old_image = $profile->image;
+                $filepath = public_path() . '/assets/images/users/' . $profile->image;
+                try {
+                    File::delete($filepath);
+                } catch (FileNotFoundException $e) {
+                    //Exception $e;
+                }
+            }
+            $profile->image = $filename;
+        }
+        $profile->save();
+
+        $response = [
+            'success'   => true,
+            'title' => 'Berhasil',
+            'message' => "Data diri telah diperbarui"
+        ];
+
+        return response()->json($response, 200);
+
     }
 }

@@ -39,7 +39,7 @@ class KajianController extends Controller
             $filename = Str::random(6) . '_' . $file->getClientOriginalName();
             $upload = $file->move($path, $filename);
 
-            if ($baru->image) {
+            if ($baru->image && $baru->image != 'default-avatar.jpg') {
                 $old_image = $baru->image;
                 $filepath = public_path() . '/assets/images/posts/' . $baru->image;
                 try {
@@ -89,7 +89,7 @@ class KajianController extends Controller
             $filename = Str::random(6) . '_' . $file->getClientOriginalName();
             $upload = $file->move($path, $filename);
 
-            if ($ubah->image) {
+            if ($ubah->image && $ubah->image != 'default-avatar.jpg') {
                 $old_image = $ubah->image;
                 $filepath = public_path() . '/assets/images/posts/' . $ubah->image;
                 try {

@@ -42,7 +42,7 @@
                         <div class="row">
                         <div class="form-group col-md-6 col-12">
                             <label>Nama</label>
-                            <input type="text" class="form-control" value="{{ Auth::user()->name }}" required="">
+                            <input type="text" class="form-control" value="{{ Auth::user()->name }}" required="" name="name">
                             <div class="invalid-feedback">
                             Kolom nama harus diisi!
                             </div>
@@ -58,7 +58,7 @@
                         <div class="row">
                         <div class="form-group col-md-7 col-12">
                             <label>Tanggal Lahir</label>
-                            <input type="date" class="form-control" value="{{ Auth::user()->dob }}">
+                            <input type="date" class="form-control" name="dob" value="{{ Auth::user()->dob }}">
                         </div>
                         <div class="form-group col-md-5 col-12">
                             <label>Jenis Kelamin</label>
@@ -148,10 +148,9 @@
         }
     };
 
-    JQFValidation("#form-profile", '/admin/profile', 'POST', rules_data, message_data);
+    JQFValidation('/admin/profile', 'POST', rules_data, message_data);
 
     function JQFValidation(
-        idForm,
         to,
         method,
         rules = {},
@@ -162,7 +161,7 @@
         //     debug: true
         // });
 
-        $(idForm).validate({
+        $("#form-profile").validate({
             rules: rules,
             messages: message,
             highlight: function(element) {
@@ -184,17 +183,11 @@
                     ? element.insertBefore(e.parent())
                     : element.insertAfter(e);
 
-                    console.log("elemet", element);
-                    console.log("e", e);
-
             },
             submitHandler: function(form) {
                 let formData = new FormData($(form)[0]);
 
-                $(idForm + ' button[type="submit"]').attr("disabled", true);
-
-                $("input#g1").val(1);
-                $("input#g2").val(2);
+                $("#form-profile" + ' button[type="submit"]').attr("disabled", true);
 
                 $.ajax({
                     url: to,
@@ -206,7 +199,7 @@
                     success: res => {
                         let data = res.data || {};
 
-                        $(idForm + ' button[type="submit"]').attr(
+                        $("#form-profile" + ' button[type="submit"]').attr(
                             "disabled",
                             false
                         );
@@ -238,7 +231,7 @@
                         }
                     },
                     error: err => {
-                        $(idForm + ' button[type="submit"]').attr(
+                        $("#form-profile" + ' button[type="submit"]').attr(
                             "disabled",
                             false
                         );
