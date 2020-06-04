@@ -73,7 +73,7 @@
                         @if ($uId)
                             <div class="comment">
                                 <a class="avatar">
-                                    <img src="/assets/images/users/{{ Auth::user()->image }}">
+                                    <img src="/assets/images/users/{{ Auth::user()->image ? Auth::user()->image : 'default-avatar.jpg' }}">
                                 </a>
                                 <div class="content">
                                     <form action="/kajian/{{ $post->id }}/comment/add" method="post">
@@ -99,13 +99,19 @@
                                             <div class="date">{{ $data->created_at->diffForHumans() }}</div>
                                             @if ($post->user->id == $data->user_id)
                                                 <div class="rating"><i class="fa fa-star" aria-hidden="true"></i> Author</div>
-                                                <form action="/kajian/comment/{{ $data->id }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                                </form>
-                                            @else
                                             @endif
+                                            <div class="">
+                                                @if (Auth::check())
+                                                    @if (Auth::user()->id === $data->user_id)
+                                                        <form action="/kajian/comment/{{ $data->id }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                        </form>
+                                                    @endif
+                                                @endif
+                                            </div>
+
                                         </div>
                                         <div class="text">
                                             {{ $data->content }}
