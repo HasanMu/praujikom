@@ -17,7 +17,7 @@
                         <a href="#">{{ Auth::user()->name }}</a>
                         <ul>
                             <li><a href="/profile">
-                                <i class="fa fa-user"></i> &nbsp; Profilku {{ Auth::whereRoleIs('admin')}}
+                                <i class="fa fa-user"></i> &nbsp; Profilku
                             <li><a href="javascript:void(0)"
                                 onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
